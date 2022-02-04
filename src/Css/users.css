@@ -1,0 +1,27 @@
+.table-head{
+    background-color: rgb(177, 190, 177)
+}
+.edit{
+    padding: 0.5em;
+    background-color: orange;
+    color: white;
+    border: none;
+}
+.edit:hover{
+    cursor: pointer;
+}
+.edit:active{
+    padding: 0;
+}
+.delete{
+    padding: 0.5em;
+    background-color: red;
+    color: white;
+    border: none;
+}
+.delete:hover{
+    cursor: pointer;
+}
+.delete:active{
+    padding: 0;
+}

@@ -1,12 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import {localData} from "./data/data"
+import Heading from './components/Heading';
+import Users from './components/Users';
+import { useSelector, useDispatch } from 'react-redux'
+import { addUser, editUser, deleteUser } from "./features/admin/adminSlice"
+import { ToastContainer } from 'react-toastify';
+
 function App() {
-  const [data, setData] = useState(localData);
-  console.log(data)
+  const dispatch = useDispatch()
+  const admin = useSelector(state=>state.admin.value)
   return (
     <div className="App">
-      Hello redux      
+      <h1>Dashboard</h1>
+      <ToastContainer />
+      <Heading/>  
+      <Users data= {admin}/>  
     </div>
   );
 }
