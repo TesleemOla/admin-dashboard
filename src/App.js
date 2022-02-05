@@ -1,21 +1,36 @@
 import React from 'react';
 import './App.css';
-import Heading from './components/Heading';
-import Users from './components/Users';
-import { useSelector, useDispatch } from 'react-redux'
-import { addUser, editUser, deleteUser } from "./features/admin/adminSlice"
-import { ToastContainer } from 'react-toastify';
+import Home from "./components/Home"
+import AddUser from './components/AddUser';
+import EditUser from './components/EditUser';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link
+} from "react-router-dom";
+
 
 function App() {
-  const dispatch = useDispatch()
-  const admin = useSelector(state=>state.admin.value)
+  
   return (
+    
     <div className="App">
-      <h1>Dashboard</h1>
-      <ToastContainer />
-      <Heading/>  
-      <Users data= {admin}/>  
+      
+      <Router>
+        <Link to="/">
+          <h1>Dashboard</h1>
+        </Link>
+      <Routes>    
+        <Route path="/" element={<Home/>}/>    
+        <Route path="/AddUser" element={<AddUser/>}/>
+          
+        <Route path="/EditUser/:id" element={<EditUser/>}/>
+          
+        </Routes>
+      </Router>
     </div>
+    
   );
 }
 

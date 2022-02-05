@@ -3,6 +3,10 @@
     padding: 0;
 }
 .App{
-    width: 60vw;
+    width: 80vw;
     margin: 1em auto;
+}
+a{
+    text-decoration: none;
+    color: black;
 }

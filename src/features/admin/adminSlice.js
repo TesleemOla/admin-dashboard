@@ -21,8 +21,8 @@ export const adminSlice = createSlice({
         editUser: (state, action)=>{
             const usertoEdit = action.payload
             const editedUser =state.find((item)=> usertoEdit.id === item.id)
-            const filtered = state.filter((item) => usertoEdit.id !== item.id )
-            return [...filtered, editedUser]
+            const filtered = state.filter((item) => usertoEdit.id === item.id )
+            return [...state, {...filtered, editedUser}]
         },
         deleteUser: (state, action)=>{
             const userTodelete = action.payload

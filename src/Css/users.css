@@ -4,6 +4,7 @@
 .edit{
     padding: 0.5em;
     background-color: orange;
+    border-radius: 5px;
     color: white;
     border: none;
 }
@@ -16,12 +17,49 @@
 .delete{
     padding: 0.5em;
     background-color: red;
+    border-radius: 5px;
     color: white;
     border: none;
 }
 .delete:hover{
-    cursor: pointer;
-}
-.delete:active{
     padding: 0;
+}
+.form{
+    background-color:  white;
+    height: 60vh;
+    width: 60vw;
+    margin: 10px;
+    margin-left: 25%;
+    margin-right: 40%;
+}
+.input{
+    width: 50%;
+    height: 1em;
+    text-align: center;
+    margin: 2em;
+    padding: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(230, 246, 246);
+    outline: none;
+}
+.submit{
+    padding: 10px;
+    margin: 10px;
+    background-color: blue;
+    color: white;
+    margin-left: 10%;
+    margin-right: 40%;
+    border: none;
+    border-radius: 5px;
+}
+.cancel{
+    padding: 10px;
+    margin: 10px;
+    background-color: orange;
+    color: white;
+    margin-left: 15%;
+    margin-right: 10%;
+    border: none;
+    border-radius: 5px;
 }
