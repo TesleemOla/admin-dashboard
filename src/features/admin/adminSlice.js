@@ -1,23 +1,6 @@
-<<<<<<< HEAD
 import { createSlice } from "@reduxjs/toolkit";
 import { localData } from '../../data/data';
-=======
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { localData } from "../../data/data"
 
-// export const getUsers = createAsyncThunk(
-//     'users/getUsers', 
-//     async ()=>{
-//         const response = await fetch('https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data');
-//         if(response.ok){
-//             const users = await response.json()
-//             return { users }
-//         }
-//     }
-
-//     );
-    
->>>>>>> a7d070038c8f054556e8e5a7aa694595a13e1f45
 export const adminSlice = createSlice({
     name: 'users',
     initialState: localData,
@@ -42,23 +25,13 @@ export const adminSlice = createSlice({
         },
         deleteUser: (state, action)=>{
             const userTodelete = action.payload
-<<<<<<< HEAD
             console.log(userTodelete)
             const filtered = state.value.filter((item)=> item.id === userTodelete.id )
             return [...filtered]
         }
-    }
-=======
-            return state.filter((item)=> item.id !== userTodelete.id )
+
         },
-    },
-    // extraReducers: {
-        
-    //     [getUsers.fulfilled]:(state, action) =>{
-    //         return action.payload.users;
-    //          }
-    // }
->>>>>>> a7d070038c8f054556e8e5a7aa694595a13e1f45
+
 })
 
 export const { addUser, editUser, deleteUser } = adminSlice.actions
