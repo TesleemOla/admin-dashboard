@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-// import { addUser } from '../features/admin/adminSlice';
-import { useNavigate } from "react-router-dom"
-=======
 import { addUser } from '../features/admin/adminSlice';
 import { useDispatch } from "react-redux"
 import { Navigate } from "react-router-dom"
 import Notification from "./Notification"
 import Form from './Form';
->>>>>>> a7d070038c8f054556e8e5a7aa694595a13e1f45
+
 const AddUser = () => {
 
   const dispatch = useDispatch();
