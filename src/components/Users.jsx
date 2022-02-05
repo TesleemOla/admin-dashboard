@@ -9,9 +9,7 @@ import Tables from './Tables';
 
 const Users = () => {
   const users = useSelector((state)=> state.users)
-  
-
-
+ 
   // state for Notification
   const [message, setMessage]= useState(null)
   const [Class, setClass] = useState(null);
