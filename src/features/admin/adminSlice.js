@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { localData } from '../../data/data';
 export const adminSlice = createSlice({
     name: 'admin',
@@ -26,7 +26,8 @@ export const adminSlice = createSlice({
         },
         deleteUser: (state, action)=>{
             const userTodelete = action.payload
-            const filtered = state.filter((item)=> item.id === userTodelete.id )
+            console.log(userTodelete)
+            const filtered = state.value.filter((item)=> item.id === userTodelete.id )
             return [...filtered]
         }
     }

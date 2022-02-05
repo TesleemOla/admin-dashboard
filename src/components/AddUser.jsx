@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addUser } from '../features/admin/adminSlice';
+// import { addUser } from '../features/admin/adminSlice';
 import { useNavigate } from "react-router-dom"
 const AddUser = () => {
   const [name,setName]= useState('');
