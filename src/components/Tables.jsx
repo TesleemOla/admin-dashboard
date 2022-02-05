@@ -35,7 +35,7 @@ const Tables = ({adminUsers, handleDelete}) => {
               <TableCell align="center">{row.email}</TableCell>
               <TableCell align="center">{row.address.city}</TableCell>
               <TableCell align="center">
-                <Link to="/EditUser/:id">
+                <Link to={`/EditUser/${row.id}`}>
                   <button className="edit">Edit</button>
                 </Link>
               </TableCell>
