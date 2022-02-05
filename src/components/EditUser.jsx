@@ -1,7 +1,11 @@
 import React, {useState} from 'react';
 import { useParams } from "react-router-dom"
+import { useDispatch } from 'react-redux';
+import { editUser } from '../features/admin/adminSlice';
+import Form from './Form';
 const EditUser = () => {
   const {id} = useParams()
+  const dispatch = useDispatch()
    const [name, setName] = useState("");
    const [userName, setUserName] = useState("");
    const [email, setEmail] = useState("");
@@ -18,48 +22,23 @@ const EditUser = () => {
    const handleCityChange=(e)=>{
      setCity(e.target.value)
    }
+   const handleFormSubmit=(e)=>{
+     e.preventDefault()
+     dispatch(editUser())
+   }
   return (
     <div className="form">
-      <form className="Edit">
-        <h1>Edit User data {id}</h1>
-
-        <input
-          type="text"
-          className="input"
-          placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
-        />
-        <br />
-
-        <input
-          type="text"
-          className="input"
-          placeholder="Username"
-          value={userName}
-          onChange={handleUsername}
-        />
-        <br />
-
-        <input
-          type="email"
-          className="input"
-          placeholder="Name@name.com"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <br />
-        <input
-          type="text"
-          className="input"
-          placeholder="city"
-          value={city}
-          onChange={handleCityChange}
-        />
-        <br/>
-        <button className="cancel">Cancel</button>
-        <input type="submit" className="submit" value="Submit"/>
-      </form>
+      <Form
+        name={name}
+        city={city}
+        userName={userName}
+        email={email}
+        handleNameChange={handleNameChange}
+        handleCityChange={handleCityChange}
+        handleEmailChange={handleEmailChange}
+        handleUsername={handleUsername}
+        title={`Edit User ${id} data `}    
+        onSubmit={handleFormSubmit}  />
     </div>
   );
 };

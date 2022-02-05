@@ -1,23 +1,29 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import "../Css/users.css"
-
-import { useSelector } from "react-redux";
+import { deleteUser } from '../features/admin/adminSlice';
+import { useSelector, useDispatch } from "react-redux";
 import Notification from "./Notification"
 import Tables from './Tables';
+import { getUsers } from '../features/admin/adminSlice';
 
 
 
 const Users = () => {
-  const [adminUsers, setAdminusers] = useState(useSelector((state)=> state.admin.value))
+  const dispatch = useDispatch();
+  const users = useSelector((state)=> state.users)
+  
 
+  // useEffect(()=>{
+  //   dispatch(getUsers())
+  // }, [dispatch])
   // state for Notification
   const [message, setMessage]= useState(null)
   const [Class, setClass] = useState(null);
   const handleDelete=(id)=>{
-    console.log("Deleted", id)
     const confirm = window.confirm(`Do you want to delete user ${id}`);
     if(confirm=== true){
-      setAdminusers(adminUsers.filter((user)=> user.id !== id ))
+      const item = users.filter((user)=> user.id === id)
+       dispatch(deleteUser(item))
       setMessage(" User Successfully deleted")
         setClass("delete")
       setTimeout(()=>{
@@ -30,7 +36,7 @@ const Users = () => {
   return (
     <section>
       <Notification message={message} Class={Class} />
-      <Tables adminUsers={adminUsers}
+      <Tables adminUsers={users}
       handleDelete={handleDelete}/>
     </section>
   );

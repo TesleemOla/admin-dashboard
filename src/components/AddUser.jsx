@@ -1,60 +1,54 @@
 import React, { useState } from 'react';
 import { addUser } from '../features/admin/adminSlice';
-import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { Navigate } from "react-router-dom"
+import Notification from "./Notification"
+import Form from './Form';
 const AddUser = () => {
+
+  const dispatch = useDispatch();
+
   const [name,setName]= useState('');
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+
   const handleNameChange=(e)=>{
     setName(e.target.value)
   }
   const handleUsername = (e) => {
     setUserName(e.target.value);
   };
+  const handleCityChange = (e) => {
+    setCity(e.target.value);
+  };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-  const history = useNavigate();
+  
   const handleFormSubmit=(e)=>{
     e.preventDefault()
-    console.log(e.target.value)
-    history.push('/')
+    console.log(e.target.value);
+    dispatch(addUser(name, userName,email, city))
+    Navigate(-1)
   }
-  return (
+  return (<>
+    <Notification message={null} Class={null}/>
     <div className="form">
-      <form className="Add" onSubmit={handleFormSubmit}>
-        <h1>Add New User</h1>
-        <input
-          type="text"
-          className="input"
-          placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
-        />
-        <br />
-
-        <input
-          type="text"
-          className="input"
-          placeholder="Username"
-          value={userName}
-          onChange={handleUsername}
-        />
-        <br />
-
-        <input
-          type="email"
-          className="input"
-          placeholder="Name@name.com"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <br />
-        <input type="submit" className="submit"
-        value="Submit" />
-         
-      </form>
+      <Form
+        name={name}
+        city={city}
+        userName={userName}
+        email={email}
+        handleNameChange={handleNameChange}
+        handleCityChange={handleCityChange}
+        handleEmailChange={handleEmailChange}
+        handleUsername={handleUsername}
+        title={`Add a new user`}
+        onSubmit={(e)=>handleFormSubmit(e)}
+      />
     </div>
+    </>
   );
 };
 
