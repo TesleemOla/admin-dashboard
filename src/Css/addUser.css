@@ -1,0 +1,9 @@
+.success{
+    padding: 0.5em;
+    background-color: green;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    position: absolute;
+    top: 0;
+}

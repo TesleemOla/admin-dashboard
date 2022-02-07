@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 
 const Tables = ({adminUsers, handleDelete}) => {
+  
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -40,7 +41,7 @@ const Tables = ({adminUsers, handleDelete}) => {
                 </Link>
               </TableCell>
               <TableCell>
-                <button className="delete" onClick={() => handleDelete(row.id)}>
+                <button className="delete" onClick={()=>handleDelete(row.id)}>
                   Delete
                 </button>
               </TableCell>
