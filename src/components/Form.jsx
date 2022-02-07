@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Form = ({name, title, handleNameChange,email, handleEmailChange,
+const Form = ({name, title, onSubmit, handleNameChange,email, handleEmailChange,
      city, handleCityChange, userName, handleUsername, id}) => {
   return (
-    <form className="Edit">
+    <form className="Edit" onSubmit={onSubmit}>
       <h1>{title}</h1>
 
       <input
@@ -40,8 +40,13 @@ const Form = ({name, title, handleNameChange,email, handleEmailChange,
         onChange={handleCityChange}
       />
       <br />
-      <button className="cancel">Cancel</button>
-      <input type="submit" className="submit" value="Submit" />
+      <button className="cancel"
+      
+      >Cancel</button>
+       { name && email && userName?
+      <input type="submit" className="submit" value="Submit"/>:
+      <span className='submit'>Submit</span>
+    }
     </form>
   );
 };

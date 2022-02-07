@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
 export const getUsers = createAsyncThunk(
     'users/getUsers',
     async ()=>{
@@ -10,21 +11,27 @@ export const getUsers = createAsyncThunk(
         }
     }
 )
-const state = []
+
 export const adminSlice = createSlice({
     name: 'users',
-    initialState: state,
+    initialState: [],
     reducers:{
          addUser: (state, action)=>{
-           state = [...state, action.payload]
+           return [...state, action.payload]
+           
         },
         editUser: (state, action)=>{
-            const filtered = state.filter((item) => item.id !== action.payload.id )
-            state = [...filtered, action.payload]
-        },
-        deleteUser: (state, action)=>{
-            const filtered = state.filter((item)=> item.id !== action.payload.id )
-            state = [...filtered]
+            const newstate = state.map((user) => {
+                return(user.id === action.payload.id?
+                    action.payload:
+                    user)
+            })
+            return newstate
+                    },
+        deleteUser: (state, action)=>{      
+            const userTodelete = action.payload
+            const filtered = state.filter((item) => item.id !== userTodelete.id)
+            return [...filtered]
         }
 
         },

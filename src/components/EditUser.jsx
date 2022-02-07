@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useDispatch } from 'react-redux';
 import { editUser } from '../features/admin/adminSlice';
 import Notification from './Notification';
@@ -8,6 +8,7 @@ const EditUser = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
+  const navigate = useNavigate()
   // state for Notification
   const [message, setMessage] = useState(null);
   const [Class, setClass] = useState(null);
@@ -29,12 +30,19 @@ const EditUser = () => {
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit =(e) => {
     e.preventDefault();
     console.log(e.target.value)
     dispatch(editUser({
-
+      id
     }));
+    navigate('/')
+    setMessage("User Added successfully");
+    setClass("success");
+    setTimeout(() => {
+      setMessage(null);
+      setClass(null);
+    }, 5000);
   };
   return (
     <>
@@ -50,7 +58,7 @@ const EditUser = () => {
           handleEmailChange={handleEmailChange}
           handleUsername={handleUsername}
           title={`Edit User ${id} data `}
-          onSubmit={handleFormSubmit}
+          onSubmit={()=>handleFormSubmit}
         />
       </div>
     </>

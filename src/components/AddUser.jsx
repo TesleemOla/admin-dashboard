@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { addUser } from '../features/admin/adminSlice';
 import { useDispatch, useSelector } from "react-redux"
-import { Navigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Notification from "./Notification"
 import Form from './Form';
+import "../Css/addUser.css"
 
 const AddUser = () => {
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   const users = useSelector((state) => state.users);
 
 
@@ -35,18 +37,25 @@ const AddUser = () => {
   };
 
   const handleFormSubmit = (e) => {
+    console.log(e.target.value)
     e.preventDefault();
     console.log(e.target.value);
-    dispatch(addUser({name,
+    dispatch(addUser({name: name,
        username: userName,
-        email,
+        email: email,
          address:{city: city},
-          id: users[userName.length-1].id + 1}));
-    Navigate(-1);
+          id: users[users.length-1].id + 1}));
+        navigate("/");
     setName('');
     setUserName('');
     setCity('');
     setEmail('');
+    setMessage('User Added successfully')
+    setClass('success')
+    setTimeout(()=>{
+      setMessage(null);
+      setClass(null)
+    }, 5000)
   };
   return (
     <>
@@ -62,7 +71,7 @@ const AddUser = () => {
           handleEmailChange={handleEmailChange}
           handleUsername={handleUsername}
           title={`Add a new user`}
-          onSubmit={(e) => handleFormSubmit(e)}
+          onSubmit={() => handleFormSubmit()}
         />
       </div>
     </>
