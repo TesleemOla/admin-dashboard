@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Home from "./components/Home"
-import AddUser from './components/AddUser';
 import EditUser from './components/EditUser';
 import {
   BrowserRouter as Router,
@@ -22,9 +21,7 @@ function App() {
           <h1>Dashboard</h1>
         </Link>
       <Routes>    
-        <Route path="/" element={<Home/>}/>    
-        <Route path="/AddUser" element={<AddUser/>}/>
-          
+        <Route path="/" element={<Home/>}/>      
         <Route path="/EditUser/:id" element={<EditUser/>}/>
           
         </Routes>

@@ -32,6 +32,14 @@
     margin-left: 25%;
     margin-right: 40%;
 }
+.Edit{
+    background-color:  burlywood;
+    height: 90vh;
+    width: 80vw;
+    position: absolute;
+    top: 0;
+    left: 5;
+}
 .input{
     width: 50%;
     height: 1em;
@@ -55,11 +63,21 @@
 }
 .cancel{
     padding: 10px;
-    margin: 10px;
+    width: 7%;
     background-color: orange;
     color: white;
     margin-left: 15%;
     margin-right: 10%;
+    border: none;
+    border-radius: 5px;
+}
+.disable{
+    padding: 10px;
+    margin: 10px;
+    background-color: grey;
+    color: white;
+    margin-left: 10%;
+    margin-right: 40%;
     border: none;
     border-radius: 5px;
 }

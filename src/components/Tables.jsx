@@ -6,10 +6,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
+
 
 const Tables = ({adminUsers, handleDelete}) => {
-  
+ const handleEdit=(id)=>{
+    console.log(`Now you can edit ${id} as you wish`)
+ }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -36,12 +38,10 @@ const Tables = ({adminUsers, handleDelete}) => {
               <TableCell align="center">{row.email}</TableCell>
               <TableCell align="center">{row.address.city}</TableCell>
               <TableCell align="center">
-                <Link to={`/EditUser/${row.id}`}>
-                  <button className="edit">Edit</button>
-                </Link>
+                  <button className="edit" onClick={()=>handleEdit(row.id)}>Edit</button>
               </TableCell>
               <TableCell>
-                <button className="delete" onClick={()=>handleDelete(row.id)}>
+                <button className="delete" onClick={() => handleDelete(row.id)}>
                   Delete
                 </button>
               </TableCell>

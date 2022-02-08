@@ -58,7 +58,7 @@ const EditUser = () => {
           handleEmailChange={handleEmailChange}
           handleUsername={handleUsername}
           title={`Edit User ${id} data `}
-          onSubmit={()=>handleFormSubmit}
+          onSubmit={handleFormSubmit}
         />
       </div>
     </>

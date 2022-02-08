@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Form = ({name, title, onSubmit, handleNameChange,email, handleEmailChange,
-     city, handleCityChange, userName, handleUsername, id}) => {
+     city, handleCityChange, userName, handleUsername, onCancel}) => {
   return (
     <form className="Edit" onSubmit={onSubmit}>
       <h1>{title}</h1>
@@ -40,13 +40,15 @@ const Form = ({name, title, onSubmit, handleNameChange,email, handleEmailChange,
         onChange={handleCityChange}
       />
       <br />
-      <button className="cancel"
-      
-      >Cancel</button>
-       { name && email && userName?
-      <input type="submit" className="submit" value="Submit"/>:
-      <span className='submit'>Submit</span>
-    }
+
+      {name && email && userName ? (
+        <input type="submit" className="submit" value="Submit" />
+      ) : (
+        <span className="disable">Submit</span>
+      )}
+      <button className="cancel" onClick={onCancel}>
+        Cancel
+      </button>
     </form>
   );
 };
