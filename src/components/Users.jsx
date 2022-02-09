@@ -22,7 +22,6 @@ const Users = () => {
   const [message, setMessage]= useState(null)
   const [Class, setClass] = useState(null);
   const handleDelete=(id)=>{
-    console.log(id)
     const confirm = window.confirm(`Do you want to delete user ${id}`);
     if(confirm=== true){
       dispatch(deleteUser({id: id}))
