@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Home from "./components/Home"
-import EditUser from './components/EditUser';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -21,10 +21,8 @@ function App() {
           <h1>Dashboard</h1>
         </Link>
       <Routes>    
-        <Route path="/" element={<Home/>}/>      
-        <Route path="/EditUser/:id" element={<EditUser/>}/>
-          
-        </Routes>
+        <Route path="/" element={<Home/>}/>               
+      </Routes>
       </Router>
     </div>
     

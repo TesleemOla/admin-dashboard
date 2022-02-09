@@ -33,18 +33,20 @@
     margin-right: 40%;
 }
 .Edit{
-    background-color:  burlywood;
+    background-color:  rgb(125, 203, 230);
+    border-radius: 8px;
+    padding: 1em;
     height: 90vh;
-    width: 80vw;
+    width: 60vw;
     position: absolute;
-    top: 0;
-    left: 5;
+    top: 10;
+    left: 3;
 }
 .input{
     width: 50%;
     height: 1em;
-    text-align: center;
-    margin: 2em;
+    align-content: center;
+    margin: 2em 8em;
     padding: 1em;
     border: none;
     border-radius: 5px;
@@ -56,17 +58,16 @@
     margin: 10px;
     background-color: blue;
     color: white;
-    margin-left: 10%;
-    margin-right: 40%;
+    margin-right: 20%;
     border: none;
     border-radius: 5px;
 }
 .cancel{
     padding: 10px;
-    width: 7%;
+    width: 10%;
     background-color: orange;
     color: white;
-    margin-left: 15%;
+    margin-left: 5%;
     margin-right: 10%;
     border: none;
     border-radius: 5px;
@@ -74,7 +75,7 @@
 .disable{
     padding: 10px;
     margin: 10px;
-    background-color: grey;
+    background-color: gray;
     color: white;
     margin-left: 10%;
     margin-right: 40%;
