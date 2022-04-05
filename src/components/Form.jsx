@@ -41,10 +41,10 @@ const Form = ({name, title, onSubmit, handleNameChange,email, handleEmailChange,
       />
       <br />
 
-      {name && email && userName ? (
+      {name? (
         <input type="submit" className="submit" value="Submit" />
       ) : (
-        <span className="disable">Submit</span>
+        <button className="disable" disabled>Submit</button>
       )}
       <button className="cancel" onClick={onCancel}>
         Cancel

@@ -5,10 +5,6 @@ import Notification from "./Notification"
 import Tables from './Tables';
 import { getUsers, deleteUser } from '../features/admin/adminSlice';
 
-
-
-
-
 const Users = () => {
   const dispatch = useDispatch();
   const users = useSelector((state)=> state.users)
