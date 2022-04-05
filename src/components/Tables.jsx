@@ -22,6 +22,7 @@ const Tables = ({adminUsers, handleDelete}) => {
   const [Class, setClass] = useState(null);
   // state for payload
   const [name, setName] = useState("");
+  const [nameToEdit, setNameToEdit]= useState(null)
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
@@ -61,9 +62,13 @@ const Tables = ({adminUsers, handleDelete}) => {
     setEmail("");
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = (row) => {
     setIsOpen(true)
-    setIdentifier(id);
+    setIdentifier(row.id);
+    setNameToEdit(row.name)
+    setEmail(row.email);
+    setUserName(row.username);
+    setCity(row.city)
   };
   const handleCancel = () => {
     setIsOpen(false);
@@ -87,7 +92,7 @@ const Tables = ({adminUsers, handleDelete}) => {
             handleCityChange={handleCityChange}
             handleEmailChange={handleEmailChange}
             handleUsername={handleUsername}
-            title={`Edit User ${identifier} data `}
+            title={`Edit User ${nameToEdit}'s data `}
             onSubmit={handleFormSubmit}
             onCancel={handleCancel}
           />
@@ -120,7 +125,7 @@ const Tables = ({adminUsers, handleDelete}) => {
                 <TableCell align="center">{row.email}</TableCell>
                 <TableCell align="center">{row.address.city}</TableCell>
                 <TableCell align="center">
-                  <button className="edit" onClick={() => handleEdit(row.id)}>
+                  <button className="edit" onClick={() => handleEdit(row)}>
                     Edit
                   </button>
                 </TableCell>
