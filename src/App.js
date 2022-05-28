@@ -1,14 +1,7 @@
 import React from 'react';
 import './App.css';
-import Home from "./components/Home"
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link
-} from "react-router-dom";
-
+import Users from './components/Users';
+import Heading from './components/Heading'
 
 function App() {
   
@@ -16,14 +9,11 @@ function App() {
     
     <div className="App">
       
-      <Router>
-        <Link to="/">
           <h1>Dashboard</h1>
-        </Link>
-      <Routes>    
-        <Route path="/" element={<Home/>}/>               
-      </Routes>
-      </Router>
+          <Heading />
+          <Users 
+          // adminUsers={adminUsers} handleDelete={handleDelete}
+          />
     </div>
     
   );

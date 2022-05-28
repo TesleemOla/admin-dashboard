@@ -5,7 +5,6 @@ const Form = ({name, title, onSubmit, handleNameChange,email, handleEmailChange,
   return (
     <form className="Edit" onSubmit={onSubmit}>
       <h1>{title}</h1>
-
       <input
         type="text"
         className="input"
