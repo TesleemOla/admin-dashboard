@@ -5,7 +5,7 @@ import Notification from "./Notification"
 import Tables from './Tables';
 import { getUsers, deleteUser } from '../features/admin/adminSlice';
 import Form from "./Form"
-import { addUser, editUser } from "../features/admin/adminSlice";
+import { editUser } from "../features/admin/adminSlice";
 
 
 const Users = () => {
@@ -25,10 +25,7 @@ const Users = () => {
    const [formValues, setFormValues] = useState({
      });
 
-  //  (e) => {
-  //                 setFormValues({ ...formValues, name: e.target.value });
-  //               }}
-  // state for Notification
+  
   const [message, setMessage]= useState(null)
   const [Class, setClass] = useState(null);
   const [isOpen,setIsOpen] = useState(false)
@@ -45,24 +42,7 @@ const Users = () => {
     }
   }
   
-  const handleAdd=(e)=>{
-    e.preventDefault();
-      e.preventDefault();
-    dispatch(
-      addUser({
-        ...formValues,
-        id: users[users.length - 1].id + 1,
-      })
-    );
-    setFormValues({})
-    setMessage("User Added successfully");
-    setClass("success");
-    setIsOpen(false)
-    setTimeout(() => {
-      setMessage(null);
-      setClass(null);
-    }, 5000);
-  };
+  
   
   const SubmitEdit =(e)=>{
      e.preventDefault();
