@@ -1,55 +1,72 @@
-import React from 'react';
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableBody from "@mui/material/TableBody";
+import Table from "@mui/material/Table"
 
-const Form = ({name, title, onSubmit, handleNameChange,email, handleEmailChange,
-     city, handleCityChange, userName, handleUsername, onCancel}) => {
+const Form = ({name, username, email, address, handleSubmit,
+   cancel, onNameChange, onUserChange, onEmailChange, onAddressChange}) => {
+
+ 
+  
   return (
-    <form className="Edit" onSubmit={onSubmit}>
-      <h1>{title}</h1>
-      <input
-        type="text"
-        className="input"
-        placeholder="Name"
-        value={name}
-        onChange={handleNameChange}
-      />
-      <br />
-
-      <input
-        type="text"
-        className="input"
-        placeholder="Username"
-        value={userName}
-        onChange={handleUsername}
-      />
-      <br />
-
-      <input
-        type="email"
-        className="input"
-        placeholder="Name@name.com"
-        value={email}
-        onChange={handleEmailChange}
-      />
-      <br />
-      <input
-        type="text"
-        className="input"
-        placeholder="city"
-        value={city}
-        onChange={handleCityChange}
-      />
-      <br />
-
-      {name? (
-        <input type="submit" className="submit" value="Submit" />
-      ) : (
-        <button className="disable" disabled>Submit</button>
-      )}
-      <button className="cancel" onClick={onCancel}>
-        Cancel
-      </button>
-    </form>
-  );
-};
+    <TableContainer>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell align="center">Name</TableCell>
+            <TableCell align="center">Username</TableCell>
+            <TableCell align="center">Email</TableCell>
+            <TableCell align="center">Address</TableCell>
+            <TableCell align="center">Submit</TableCell>
+            <TableCell align="center">Cancel</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>
+              <input
+                type="text"
+                placeholder={name}
+                onChange={onNameChange}
+                // focus
+              />
+            </TableCell>
+            <TableCell>
+              <input
+                type="text"
+                placeholder={username}
+                onChange={onUserChange}
+              />
+            </TableCell>
+            <TableCell>
+              <input
+                type="email"
+                placeholder={email}
+                onChange={onEmailChange}
+              />
+            </TableCell>
+            <TableCell>
+              <input
+                type="text"
+                placeholder={address}
+                onChange={onAddressChange}
+              />
+            </TableCell>
+            <TableCell>
+              <button type="submit" onClick={handleSubmit}> Submit
+              </button>
+            </TableCell>
+            <TableCell>
+              <button type="submit" value="cancel" onClick={cancel}>
+                Cancel
+              </button>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );}
 
 export default Form;

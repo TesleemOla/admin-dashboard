@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Notification from "./Notification"
 import Tables from './Tables';
 import { getUsers, deleteUser } from '../features/admin/adminSlice';
+import Form from "./Form"
+import { addUser, editUser } from "../features/admin/adminSlice";
+
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -13,10 +16,23 @@ const Users = () => {
   useEffect(()=> {
     dispatch(getUsers());
   },[dispatch])
- 
+  
+    const [edit, setEdit] = useState(null);
+     const handleEdit = (id) => {
+       setIsOpen(true);
+       setEdit(id);
+     };
+   const [formValues, setFormValues] = useState({
+     });
+
+  //  (e) => {
+  //                 setFormValues({ ...formValues, name: e.target.value });
+  //               }}
   // state for Notification
   const [message, setMessage]= useState(null)
   const [Class, setClass] = useState(null);
+  const [isOpen,setIsOpen] = useState(false)
+  
   const handleDelete=(id)=>{
     const confirm = window.confirm(`Do you want to delete user ${id}`);
     if(confirm=== true){
@@ -28,11 +44,78 @@ const Users = () => {
         setClass(null)}, 5000)
     }
   }
+  
+  const handleAdd=(e)=>{
+    e.preventDefault();
+      e.preventDefault();
+    dispatch(
+      addUser({
+        ...formValues,
+        id: users[users.length - 1].id + 1,
+      })
+    );
+    setFormValues({})
+    setMessage("User Added successfully");
+    setClass("success");
+    setIsOpen(false)
+    setTimeout(() => {
+      setMessage(null);
+      setClass(null);
+    }, 5000);
+  };
+  
+  const SubmitEdit =(e)=>{
+     e.preventDefault();
+     dispatch(
+       editUser({
+         ...formValues,
+         id: edit.id
+       })
+     );
+     setIsOpen(false);
+     setMessage("User Modified successfully");
+     setClass("success");
+     setTimeout(() => {
+       setMessage(null);
+       setClass(null);
+     }, 5000);
+     setFormValues({})
+  }
+  const handleCancel = () => {
+    setIsOpen(false);
+    console.log('yep')
+  };
   return (
     <section>
       <Notification message={message} Class={Class} />
-      <Tables adminUsers={users}
-      handleDelete={handleDelete}/>
+      {isOpen ? (
+        <Form
+          name={edit.name}
+          username={edit.username}
+          email={edit.email}
+          address={edit.address.city}
+          onNameChange={(e) =>
+            setFormValues({ ...formValues, name: e.target.value })
+          }
+          onUserChange={(e) =>
+            setFormValues({ ...formValues, username: e.target.value })
+          }
+          onEmailChange={(e) =>
+            setFormValues({ ...formValues, email: e.target.value })
+          }
+          onAddressChange={(e) =>
+            setFormValues({ ...formValues, address: {city: e.target.value} })
+          }
+          handleSubmit={SubmitEdit}
+          cancel={handleCancel}
+        />
+      ) : (
+        <Tables
+          adminUsers={users}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
+      )}
     </section>
   );
 };

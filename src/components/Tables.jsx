@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 
-const Tables = ({adminUsers, handleDelete}) => {
+const Tables = ({adminUsers, handleDelete, handleEdit}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [identifier, setIdentifier] = useState(null)
   const dispatch = useDispatch();
@@ -62,14 +62,14 @@ const Tables = ({adminUsers, handleDelete}) => {
     setEmail("");
   };
 
-  const handleEdit = (row) => {
-    setIsOpen(true)
-    setIdentifier(row.id);
-    setNameToEdit(row.name)
-    setEmail(row.email);
-    setUserName(row.username);
-    setCity(row.city)
-  };
+  // const handleEdit = (row) => {
+  //   setIsOpen(true)
+  //   setIdentifier(row.id);
+  //   setNameToEdit(row.name)
+  //   setEmail(row.email);
+  //   setUserName(row.username);
+  //   setCity(row.city)
+  // };
   const handleCancel = () => {
     setIsOpen(false);
     setName("");
