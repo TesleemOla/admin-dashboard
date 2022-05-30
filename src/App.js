@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import Users from './components/Users';
+import Notification from './components/Notification'
 import Heading from './components/Heading';
 import Form from './components/Form'
 import { addUser } from "./features/admin/adminSlice";
@@ -60,6 +61,7 @@ function App() {
       
           <h1>Dashboard</h1>
           <div>
+            <Notification message={message} Class={Class}/>
             <Heading onClick={handleClick} />
           { openAddForm?
           <Form 
