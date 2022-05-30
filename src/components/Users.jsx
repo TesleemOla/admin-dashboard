@@ -32,7 +32,7 @@ const Users = () => {
   
   const handleDelete=(id)=>{
     const confirm = window.confirm(`Do you want to delete user ${id}`);
-    if(confirm=== true){
+    if(confirm === true){
       dispatch(deleteUser({id: id}))
       setMessage(`User ${id} Successfully deleted`)
       setClass("delete")

@@ -3,7 +3,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
-import Table from "@mui/material/Table"
+import Table from "@mui/material/Table";
+import "../Css/form.css"
 
 const Form = ({name, username, email, address, handleSubmit,
    cancel, onNameChange, onUserChange, onEmailChange, onAddressChange}) => {
@@ -30,7 +31,7 @@ const Form = ({name, username, email, address, handleSubmit,
                 type="text"
                 placeholder={name}
                 onChange={onNameChange}
-                // focus
+                autoFocus={true}
               />
             </TableCell>
             <TableCell>
@@ -55,11 +56,13 @@ const Form = ({name, username, email, address, handleSubmit,
               />
             </TableCell>
             <TableCell>
-              <button type="submit" onClick={handleSubmit}> Submit
+              <button type="submit" onClick={handleSubmit} 
+              className='submit'> Submit
               </button>
             </TableCell>
             <TableCell>
-              <button type="submit" value="cancel" onClick={cancel}>
+              <button type="submit" value="cancel" 
+              className="cancel" onClick={cancel}>
                 Cancel
               </button>
             </TableCell>

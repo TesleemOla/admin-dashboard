@@ -22,6 +22,7 @@ function App() {
   }
   const cancel =()=>{
     setFormValues({})
+    setOpenAddForm(false)
   }
   const onNameChange=(e)=>{
     setFormValues({...formValues, name: e.target.value})
@@ -59,7 +60,7 @@ function App() {
       
           <h1>Dashboard</h1>
           <div>
-          <Heading onClick={handleClick}/>
+            <Heading onClick={handleClick} />
           { openAddForm?
           <Form 
           name="Enter full name"
