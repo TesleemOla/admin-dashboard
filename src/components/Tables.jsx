@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 
-const Tables = ({adminUsers, handleDelete}) => {
+const Tables = ({adminUsers, handleDelete, handleEdit}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [identifier, setIdentifier] = useState(null)
   const dispatch = useDispatch();
@@ -62,14 +62,14 @@ const Tables = ({adminUsers, handleDelete}) => {
     setEmail("");
   };
 
-  const handleEdit = (row) => {
-    setIsOpen(true)
-    setIdentifier(row.id);
-    setNameToEdit(row.name)
-    setEmail(row.email);
-    setUserName(row.username);
-    setCity(row.city)
-  };
+  // const handleEdit = (row) => {
+  //   setIsOpen(true)
+  //   setIdentifier(row.id);
+  //   setNameToEdit(row.name)
+  //   setEmail(row.email);
+  //   setUserName(row.username);
+  //   setCity(row.city)
+  // };
   const handleCancel = () => {
     setIsOpen(false);
     setName("");
@@ -80,26 +80,6 @@ const Tables = ({adminUsers, handleDelete}) => {
   return (
     <>
       <Notification message={message} Class={Class} />
-      {isOpen ? (
-        <>
-          <br />
-          <Form
-            name={name}
-            city={city}
-            userName={userName}
-            email={email}
-            handleNameChange={handleNameChange}
-            handleCityChange={handleCityChange}
-            handleEmailChange={handleEmailChange}
-            handleUsername={handleUsername}
-            title={`Edit User ${nameToEdit}'s data `}
-            onSubmit={handleFormSubmit}
-            onCancel={handleCancel}
-          />
-        </>
-      ) : (
-        <></>
-      )}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead className="table-head">
@@ -113,6 +93,27 @@ const Tables = ({adminUsers, handleDelete}) => {
               <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
+          {isOpen ? (
+            <>
+              <br />
+              <Form
+                name={name}
+                city={city}
+                userName={userName}
+                email={email}
+                handleNameChange={handleNameChange}
+                handleCityChange={handleCityChange}
+                handleEmailChange={handleEmailChange}
+                handleUsername={handleUsername}
+                title={`Edit User ${nameToEdit}'s data `}
+                onSubmit={handleFormSubmit}
+                onCancel={handleCancel}
+              />
+            </>
+          ) : (
+            <></>
+          )}
+
           <TableBody>
             {adminUsers.map((row) => (
               <TableRow
