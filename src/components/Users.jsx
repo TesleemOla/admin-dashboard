@@ -63,7 +63,7 @@ const Users = () => {
   }
   const handleCancel = () => {
     setIsOpen(false);
-    console.log('yep')
+    console.log('closed input')
   };
   return (
     <section>

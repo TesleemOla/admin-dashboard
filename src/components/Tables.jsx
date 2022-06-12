@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Table from "@mui/material/Table";
 import Notification from "./Notification";
-import Form from "./Form"
+import Form from './Form';
 import { useDispatch } from "react-redux";
 import { editUser } from "../features/admin/adminSlice";
 import TableBody from "@mui/material/TableBody";
@@ -93,29 +93,22 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
               <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
-          {isOpen ? (
-            <>
-              <br />
-              <Form
-                name={name}
-                city={city}
-                userName={userName}
-                email={email}
-                handleNameChange={handleNameChange}
-                handleCityChange={handleCityChange}
-                handleEmailChange={handleEmailChange}
-                handleUsername={handleUsername}
-                title={`Edit User ${nameToEdit}'s data `}
-                onSubmit={handleFormSubmit}
-                onCancel={handleCancel}
-              />
-            </>
-          ) : (
-            <></>
-          )}
-
-          <TableBody>
             {adminUsers.map((row) => (
+              <TableBody>
+             {
+              isOpen? 
+              <Form name={nameToEdit}
+               username={userName}
+               email={email}
+               address={city}
+               handleSubmit={handleFormSubmit}
+              cancel={handleCancel}
+              onNameChange={handleNameChange}
+               onUserChange={handleUsername}
+              onEmailChange={handleEmailChange}
+              onAddressChange={handleCityChange}
+              Sub={`Edit`}
+              Can={"Cancel"} /> :
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -138,9 +131,10 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
                     Delete
                   </button>
                 </TableCell>
-              </TableRow>
-            ))}
+              </TableRow>}
+             
           </TableBody>
+))}
         </Table>
       </TableContainer>
     </>
