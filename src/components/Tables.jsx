@@ -93,48 +93,49 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
               <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
-            {adminUsers.map((row) => (
-              <TableBody>
-             {
-              isOpen? 
-              <Form name={nameToEdit}
-               username={userName}
-               email={email}
-               address={city}
-               handleSubmit={handleFormSubmit}
-              cancel={handleCancel}
-              onNameChange={handleNameChange}
-               onUserChange={handleUsername}
-              onEmailChange={handleEmailChange}
-              onAddressChange={handleCityChange}
-              Sub={`Edit`}
-              Can={"Cancel"} /> :
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center">{row.id}</TableCell>
-                <TableCell align="center">{row.name}</TableCell>
-                <TableCell align="center">{row.username}</TableCell>
-                <TableCell align="center">{row.email}</TableCell>
-                <TableCell align="center">{row.address.city}</TableCell>
-                <TableCell align="center">
-                  <button className="edit" onClick={() => handleEdit(row)}>
-                    Edit
-                  </button>
-                </TableCell>
-                <TableCell>
-                  <button
-                    className="delete"
-                    onClick={() => handleDelete(row.id)}
-                  >
-                    Delete
-                  </button>
-                </TableCell>
-              </TableRow>}
-             
-          </TableBody>
-))}
+          {adminUsers.map((row) => (
+            <TableBody key={row.name}>
+              {isOpen ? (
+                <Form
+                  name={nameToEdit}
+                  username={userName}
+                  email={email}
+                  address={city}
+                  handleSubmit={handleFormSubmit}
+                  cancel={handleCancel}
+                  onNameChange={handleNameChange}
+                  onUserChange={handleUsername}
+                  onEmailChange={handleEmailChange}
+                  onAddressChange={handleCityChange}
+                  Sub={`Edit`}
+                  Can={"Cancel"}
+                />
+              ) : (
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell align="center">{row.id}</TableCell>
+                  <TableCell align="center">{row.name}</TableCell>
+                  <TableCell align="center">{row.username}</TableCell>
+                  <TableCell align="center">{row.email}</TableCell>
+                  <TableCell align="center">{row.address.city}</TableCell>
+                  <TableCell align="center">
+                    <button className="edit" onClick={() => handleEdit(row)}>
+                      Edit
+                    </button>
+                  </TableCell>
+                  <TableCell>
+                    <button
+                      className="delete"
+                      onClick={() => handleDelete(row)}
+                    >
+                      Delete
+                    </button>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          ))}
         </Table>
       </TableContainer>
     </>
