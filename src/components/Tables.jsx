@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Table from "@mui/material/Table";
 import Notification from "./Notification";
-import Form from "./Form"
+import Form from './Form';
 import { useDispatch } from "react-redux";
 import { editUser } from "../features/admin/adminSlice";
 import TableBody from "@mui/material/TableBody";
@@ -93,54 +93,49 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
               <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
-          {isOpen ? (
-            <>
-              <br />
-              <Form
-                name={name}
-                city={city}
-                userName={userName}
-                email={email}
-                handleNameChange={handleNameChange}
-                handleCityChange={handleCityChange}
-                handleEmailChange={handleEmailChange}
-                handleUsername={handleUsername}
-                title={`Edit User ${nameToEdit}'s data `}
-                onSubmit={handleFormSubmit}
-                onCancel={handleCancel}
-              />
-            </>
-          ) : (
-            <></>
-          )}
-
-          <TableBody>
-            {adminUsers.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center">{row.id}</TableCell>
-                <TableCell align="center">{row.name}</TableCell>
-                <TableCell align="center">{row.username}</TableCell>
-                <TableCell align="center">{row.email}</TableCell>
-                <TableCell align="center">{row.address.city}</TableCell>
-                <TableCell align="center">
-                  <button className="edit" onClick={() => handleEdit(row)}>
-                    Edit
-                  </button>
-                </TableCell>
-                <TableCell>
-                  <button
-                    className="delete"
-                    onClick={() => handleDelete(row.id)}
-                  >
-                    Delete
-                  </button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          {adminUsers.map((row) => (
+            <TableBody key={row.name}>
+              {isOpen ? (
+                <Form
+                  name={nameToEdit}
+                  username={userName}
+                  email={email}
+                  address={city}
+                  handleSubmit={handleFormSubmit}
+                  cancel={handleCancel}
+                  onNameChange={handleNameChange}
+                  onUserChange={handleUsername}
+                  onEmailChange={handleEmailChange}
+                  onAddressChange={handleCityChange}
+                  Sub={`Edit`}
+                  Can={"Cancel"}
+                />
+              ) : (
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell align="center">{row.id}</TableCell>
+                  <TableCell align="center">{row.name}</TableCell>
+                  <TableCell align="center">{row.username}</TableCell>
+                  <TableCell align="center">{row.email}</TableCell>
+                  <TableCell align="center">{row.address.city}</TableCell>
+                  <TableCell align="center">
+                    <button className="edit" onClick={() => handleEdit(row)}>
+                      Edit
+                    </button>
+                  </TableCell>
+                  <TableCell>
+                    <button
+                      className="delete"
+                      onClick={() => handleDelete(row)}
+                    >
+                      Delete
+                    </button>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          ))}
         </Table>
       </TableContainer>
     </>

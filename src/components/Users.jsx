@@ -30,11 +30,12 @@ const Users = () => {
   const [Class, setClass] = useState(null);
   const [isOpen,setIsOpen] = useState(false)
   
-  const handleDelete=(id)=>{
-    const confirm = window.confirm(`Do you want to delete user ${id}`);
+  const handleDelete=(useract)=>{
+   
+    const confirm = window.confirm(`Do you want to delete user "${useract.name}"`);
     if(confirm === true){
-      dispatch(deleteUser({id: id}))
-      setMessage(`User ${id} Successfully deleted`)
+      dispatch(deleteUser({ id: useract.id }));
+      setMessage(`User "${useract.name}" Deleted`);
       setClass("delete")
       setTimeout(()=>{
         setMessage(null)
@@ -63,7 +64,7 @@ const Users = () => {
   }
   const handleCancel = () => {
     setIsOpen(false);
-    console.log('yep')
+    console.log('closed input')
   };
   return (
     <section>
