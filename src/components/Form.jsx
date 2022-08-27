@@ -56,13 +56,19 @@ const Form = ({name, username, email, address, handleSubmit,
               />
             </TableCell>
             <TableCell>
-              <button type="submit" onClick={handleSubmit} 
-              className='submit'> Submit
+              <button type="submit" onClick={handleSubmit} className="submit">
+                {" "}
+                Submit
               </button>
             </TableCell>
             <TableCell>
-              <button type="submit" value="cancel" 
-              className="cancel" onClick={cancel}>
+              
+              <button
+                type="submit"
+                value="cancel"
+                className="cancel"
+                onClick={cancel}
+              >
                 Cancel
               </button>
             </TableCell>

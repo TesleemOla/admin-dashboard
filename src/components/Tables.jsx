@@ -3,7 +3,7 @@ import Table from "@mui/material/Table";
 import Notification from "./Notification";
 import Form from './Form';
 import { useDispatch } from "react-redux";
-import { editUser } from "../features/admin/adminSlice";
+import { addUser } from "../features/admin/adminSlice";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -20,6 +20,7 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
   // state for Notification
   const [message, setMessage] = useState(null);
   const [Class, setClass] = useState(null);
+  const [error, setError] = useState()
   // state for payload
   const [name, setName] = useState("");
   const [nameToEdit, setNameToEdit]= useState(null)
@@ -38,10 +39,18 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
+  const Validateform=()=>{
+    if(name==="" || userName==="" || email==="" || city===""){
+      return false
+    }else{
+      return true
+    }
+  }
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    if (Validateform()){
     dispatch(
-      editUser({
+      addUser({
         name: name,
         username: userName,
         email: email,
@@ -60,16 +69,11 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
     setUserName("");
     setCity("");
     setEmail("");
+  }else{
+    setError("Please ensure to fill all fields!")
+  }
   };
 
-  // const handleEdit = (row) => {
-  //   setIsOpen(true)
-  //   setIdentifier(row.id);
-  //   setNameToEdit(row.name)
-  //   setEmail(row.email);
-  //   setUserName(row.username);
-  //   setCity(row.city)
-  // };
   const handleCancel = () => {
     setIsOpen(false);
     setName("");
@@ -96,6 +100,9 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
           {adminUsers.map((row) => (
             <TableBody key={row.name}>
               {isOpen ? (
+                <>
+                <h1>Add new Data</h1>
+                <p>{error}</p>
                 <Form
                   name={nameToEdit}
                   username={userName}
@@ -110,6 +117,7 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
                   Sub={`Edit`}
                   Can={"Cancel"}
                 />
+                </>
               ) : (
                 <TableRow
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

@@ -19,8 +19,10 @@ const Users = () => {
   
     const [edit, setEdit] = useState(null);
      const handleEdit = (id) => {
+      if(!isOpen){
        setIsOpen(true);
        setEdit(id);
+      }
      };
    const [formValues, setFormValues] = useState({
      });
@@ -70,6 +72,8 @@ const Users = () => {
     <section>
       <Notification message={message} Class={Class} />
       {isOpen ? (
+        <>
+        <h1>Edit {edit.name}</h1>
         <Form
           name={edit.name}
           username={edit.username}
@@ -90,13 +94,19 @@ const Users = () => {
           handleSubmit={SubmitEdit}
           cancel={handleCancel}
         />
+        <Tables
+          adminUsers={users.filter(item=> item !== edit)}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
+        </>
       ) : (
         <Tables
           adminUsers={users}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />
-      )}
+       )}
     </section>
   );
 };
