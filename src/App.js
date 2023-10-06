@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import './App.css';
+import Swal from "sweetalert2"
 import Users from './components/Users';
-import Notification from './components/Notification'
 import Heading from './components/Heading';
 import Form from './components/Form'
 import { addUser } from "./features/admin/adminSlice";
 import { useDispatch, useSelector } from "react-redux"
+
 
 function App() {
   const [openAddForm, setOpenAddForm]= useState(false)
@@ -13,15 +14,15 @@ function App() {
 
   const users = useSelector((state) => state.users)
 
-  // state for Notification
-  const [message, setMessage] = useState(null)
-  const [Class, setClass] = useState(null);
 
   const dispatch = useDispatch();
   const handleClick = (e) => {
     setOpenAddForm(!openAddForm)
   }
-  const cancel =()=>{
+  const handleCancel = () => {
+    setOpenAddForm(false);
+    Swal.fire({ title: "Cancelled",
+  icon: "error" })
     setFormValues({})
     setOpenAddForm(false)
   }
@@ -35,25 +36,30 @@ function App() {
     setFormValues({ ...formValues, email: e.target.value })
   }
   const onAddressChange = (e) => {
-    setFormValues({ ...formValues, address: { city: e.target.value} })
+    setFormValues({ ...formValues, city: e.target.value })
   }
-  const handleAdd = (e) => {
+  const handleAdd = useCallback((e) => {
+    
     e.preventDefault();
-    dispatch(
-      addUser({
-        ...formValues,
-        id: users[users.length - 1].id + 1,
-      })
-    );
-    setFormValues({})
-    setMessage("User Added successfully");
-    setClass("success");
-    setOpenAddForm(!openAddForm)
-    setTimeout(() => {
-      setMessage(null);
-      setClass(null);
-    }, 5000);
-  };
+    if (!formValues.name || !formValues.username || !formValues.email || !formValues.city) {
+      Swal.fire({ title: "All Values are Required" })
+    } else {
+      dispatch(
+        addUser({
+          name: formValues.name,
+          username: formValues.username,
+          email: formValues.email,
+          address: { city: formValues.city },
+          id: users[users.length - 1].id + 1,
+        })
+      );
+      setOpenAddForm(false);
+      Swal.fire({ title: "User Added successfully" });
+      setFormValues({})
+    }
+  }, [dispatch, formValues.name, formValues.username, users, formValues.email, formValues.city]);
+
+
 
   return (
     
@@ -61,7 +67,6 @@ function App() {
       
           <h1>Dashboard</h1>
           <div>
-            <Notification message={message} Class={Class}/>
             <Heading onClick={handleClick} />
           { openAddForm?
           <Form 
@@ -69,7 +74,7 @@ function App() {
           username="username"
           email="email"
           address="address"
-          cancel={cancel}
+          cancel={handleCancel}
           onNameChange={onNameChange}
           onUserChange={onUserChange}
           onEmailChange={onEmailChange}

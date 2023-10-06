@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import Table from "@mui/material/Table";
-import Notification from "./Notification";
-import Form from './Form';
 import { useDispatch } from "react-redux";
 import { editUser } from "../features/admin/adminSlice";
 import TableBody from "@mui/material/TableBody";
@@ -10,76 +8,53 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Swal from "sweetalert2"
 
 
-const Tables = ({adminUsers, handleDelete, handleEdit}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [identifier, setIdentifier] = useState(null)
+
+const Tables = ({adminUsers, handleDelete}) => {
+
+  const [openEdit, setOpenEdit] = useState({})
+     const [formValues, setFormValues] = useState(null);
+
   const dispatch = useDispatch();
 
-  // state for Notification
-  const [message, setMessage] = useState(null);
-  const [Class, setClass] = useState(null);
-  // state for payload
-  const [name, setName] = useState("");
-  const [nameToEdit, setNameToEdit]= useState(null)
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [city, setCity] = useState("");
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-  const handleUsername = (e) => {
-    setUserName(e.target.value);
-  };
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleCityChange = (e) => {
-    setCity(e.target.value);
-  };
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    dispatch(
-      editUser({
-        name: name,
-        username: userName,
-        email: email,
-        address: { city: city },
-        id: identifier,
-      })
-    );
-    setIsOpen(false)
-    setMessage("User Modified successfully");
-    setClass("success");
-    setTimeout(() => {
-      setMessage(null);
-      setClass(null);
-    }, 5000);
-    setName("");
-    setUserName("");
-    setCity("");
-    setEmail("");
+
+ 
+     const handleEdit = (row) => {
+       setOpenEdit(row);
+     };
+    const SubmitEdit =(e)=>{
+     e.preventDefault();
+    
+     if(!formValues){
+        Swal.fire({title: "No values changed"})
+        setOpenEdit(false);
+       }else{
+     dispatch(
+       editUser({
+        ...openEdit,
+         ...formValues,
+       })
+     );
+     setFormValues(null)
+     setOpenEdit(false);
+     Swal.fire({
+      title: 'Success',
+      text: "User Modified successfully",
+      icon: 'success',
+      confirmButtonText: 'OK'
+    })
+  }
+    
+  }
+  const CancelEdit = () => {
+    setOpenEdit(false);
+    Swal.fire({title: 'Edit Cancelled'})
   };
 
-  // const handleEdit = (row) => {
-  //   setIsOpen(true)
-  //   setIdentifier(row.id);
-  //   setNameToEdit(row.name)
-  //   setEmail(row.email);
-  //   setUserName(row.username);
-  //   setCity(row.city)
-  // };
-  const handleCancel = () => {
-    setIsOpen(false);
-    setName("");
-    setUserName("");
-    setCity("");
-    setEmail("");
-  };
   return (
     <>
-      <Notification message={message} Class={Class} />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead className="table-head">
@@ -94,46 +69,52 @@ const Tables = ({adminUsers, handleDelete, handleEdit}) => {
             </TableRow>
           </TableHead>
           {adminUsers.map((row) => (
-            <TableBody key={row.name}>
-              {isOpen ? (
-                <Form
-                  name={nameToEdit}
-                  username={userName}
-                  email={email}
-                  address={city}
-                  handleSubmit={handleFormSubmit}
-                  cancel={handleCancel}
-                  onNameChange={handleNameChange}
-                  onUserChange={handleUsername}
-                  onEmailChange={handleEmailChange}
-                  onAddressChange={handleCityChange}
-                  Sub={`Edit`}
-                  Can={"Cancel"}
-                />
-              ) : (
+            <TableBody key={row.name}>     
+
                 <TableRow
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="center">{row.id}</TableCell>
-                  <TableCell align="center">{row.name}</TableCell>
-                  <TableCell align="center">{row.username}</TableCell>
-                  <TableCell align="center">{row.email}</TableCell>
-                  <TableCell align="center">{row.address.city}</TableCell>
+                  <TableCell align="center">{openEdit.id === row.id?
+                  <input defaultValue={row.name}  onChange={(e) =>
+            setFormValues({name: e.target.value }) 
+          } autoFocus /> :
+                  row.name}</TableCell>
+                  <TableCell align="center">{openEdit.id === row.id?
+                  <input defaultValue={row.username}  onChange={(e) =>
+            setFormValues({username: e.target.value })
+          } /> :row.username}</TableCell>
+                  <TableCell align="center">{openEdit.id === row.id?
+                  <input defaultValue={row.email}  onChange={(e) =>
+            setFormValues({email: e.target.value })
+          } /> :row.email}</TableCell>
+                  <TableCell align="center">{openEdit.id === row.id?
+                  <input defaultValue={row.address.city}  onChange={(e) =>
+            setFormValues({address:{city: e.target.value} })
+          } /> :row?.address?.city}</TableCell>
                   <TableCell align="center">
+                    {openEdit.id === row.id?
+                    <button className="submit" onClick={SubmitEdit}>
+                      Submit
+                    </button>:
                     <button className="edit" onClick={() => handleEdit(row)}>
                       Edit
-                    </button>
+                    </button>}
                   </TableCell>
                   <TableCell>
+                    {
+                      openEdit.id === row.id?
+                      <button className="cancel" onClick={CancelEdit}>
+                        Cancel
+                      </button>:
                     <button
                       className="delete"
                       onClick={() => handleDelete(row)}
                     >
                       Delete
-                    </button>
+                    </button>}
                   </TableCell>
                 </TableRow>
-              )}
             </TableBody>
           ))}
         </Table>
